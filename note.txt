@@ -1,0 +1,28 @@
+khoahoc-nodejs/
+├── node_modules/
+├── .env
+├── .gitignore
+├── package.json
+├── package-lock.json
+├── server.js             # File khởi động chính của ứng dụng
+├── src/
+│   ├── models/           # Định nghĩa schemas và models cho CSDL
+│   │   ├── user.model.js
+│   │   └── product.model.js
+│   ├── controllers/      # Chứa logic xử lý yêu cầu (CRUD operations)
+│   │   ├── user.controller.js
+│   │   └── product.controller.js
+│   ├── services/  
+│   │   ├── 
+│   │   └── 
+│   ├── routes/           # Định nghĩa các routes API
+│   │   ├── index.js      # Tập hợp các routes chính
+│   │   ├── user.routes.js
+│   │   └── product.routes.js
+│   ├── middlewares/      # Các middleware tùy chỉnh (authentication, authorization, validation)
+│   │   └── auth.middleware.js
+│   └── config/           # Cấu hình ứng dụng (CSDL, cổng, JWT secrets, v.v.)
+│       └── db.config.js
+│       └── app.config.js
+└── utils/                # Các hàm tiện ích, helpers
+    └── errorHandler.js
