@@ -5,17 +5,36 @@ dotenv.config();
 
 // Khai báo thư viện cần thiết
 const express = require("express");
+const mongoose = require('mongoose'); // Import mongoose
+const userRoutes = require('./routes/UserRoutes'); // Import UserRoutes
 
 // Khởi tại ứng dụng Expres
 const app = express();
+
+// Middleware để phân tích cú pháp JSON từ body request
+app.use(express.json());
+
 // Lấy cổng PORT được cấu hình trong .env
 const port = process.env.PORT || 3001
+const mongoURI = process.env.MONGO_DB;
+
+// Kết nối MongoDB
+mongoose.connect(mongoURI, {})
+.then(() => {
+    console.log('Kết nối MongoDB thành công!');
+})
+.catch(err => {
+    console.error('Lỗi kết nối MongoDB:', err);
+    process.exit(1); // Thoát ứng dụng nếu không thể kết nối DB
+});
 
 // Định nghĩa routes gốc
 app.get('/', (req, res) => {
     res.send('Chạy thành công!')
-    //res.json({ message: "Chào mừng bạn đến với API RESTful của tôi!" });
 })
+
+// Sử dụng routes của người dùng
+app.use('/api/user', userRoutes);
 
 // Khởi động Server Express
 app.listen(port, () => {
