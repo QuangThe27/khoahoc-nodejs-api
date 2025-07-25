@@ -7,6 +7,7 @@ dotenv.config();
 const express = require("express");
 const mongoose = require('mongoose'); // Import mongoose
 const userRoutes = require('./routes/UserRoutes'); // Import UserRoutes
+const cors = require('cors')
 
 // Khởi tại ứng dụng Expres
 const app = express();
@@ -17,6 +18,13 @@ app.use(express.json());
 // Lấy cổng PORT được cấu hình trong .env
 const port = process.env.PORT || 3001
 const mongoURI = process.env.MONGO_DB;
+
+// Cấu hình CORS
+app.use(cors({
+    origin: 'http://localhost:3000', // Chỉ cho phép http://localhost:3000 truy cập
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Các phương thức HTTP được phép
+    allowedHeaders: ['Content-Type', 'Authorization'] // Các header được phép
+}));
 
 // Kết nối MongoDB
 mongoose.connect(mongoURI, {})
